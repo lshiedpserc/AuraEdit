@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/">
+    <file>ui/editor.html</file>
+    <file>ui/qwebchannel.js</file>
+</qresource>
+</RCC>
