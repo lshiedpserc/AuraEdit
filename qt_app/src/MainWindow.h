@@ -2,7 +2,7 @@
 
 #include <QMainWindow>
 
-class GLVideoWidget;
+class GLImageWidget;
 class QWebEngineView;
 class AppController;
 
@@ -17,7 +17,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 
 private:
-    GLVideoWidget *glWidget;
+    GLImageWidget *glWidget;
     QWebEngineView *webView;
     AppController *appController;
 

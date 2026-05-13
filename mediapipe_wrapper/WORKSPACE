@@ -1,0 +1,5 @@
+workspace(name = "aura_edit_mediapipe")
+
+# Minimal bazel workspace for MediaPipe Task API C++
+# Note: To build this natively, one would need to add:
+# http_archive for rules_cc, and google_mediapipe source.

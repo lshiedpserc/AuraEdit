@@ -7,15 +7,18 @@
 - **Frontend UI:** QWebEngineView + QWebChannel (HTML5, TailwindCSS)
 
 ## Features
+- **UI Integration:** Full Tailwind CSS mockup implemented. Transparent Chromium layer stacked on top of C++ OpenGL.
 - **Zero-Copy Architecture:** Loads QImage directly to GPU via QOpenGLTexture.
-- **GPU Shaders:** All pixel manipulation (Bilateral Blur, Warp) is run natively on the GPU without CPU fallback.
-- **IPC UI Bridge:** Sliders in the Chromium layer directly modify GLSL uniforms via `AppController` WebChannel bridge.
+- **Displacement Map Rendering:** FBO (Framebuffer Object) used to write landmark transformations into a displacement texture map in pass 1.
+- **GPU Shaders:** All pixel manipulation (Bilateral Blur, Warp via Displacement map lookup) is run natively on the GPU in pass 2.
+- **IPC UI Bridge:** Sliders in the Chromium layer modify GLSL uniforms via `AppController` WebChannel bridge.
 
-## Build Requirements
-- CMake 3.16+
-- Qt 6.4+ (WebEngine, OpenGLWidgets, WebChannel)
-- Supported C++20 Compiler (GCC 10+, Clang 10+, MSVC 19.29+)
-- OpenGL 3.3+ capable hardware
+## MediaPipe Integration
+To build MediaPipe properly for your host environment:
+1. Ensure Bazel is installed.
+2. Checkout the Google MediaPipe repository and point `WORKSPACE` correctly.
+3. Build the `mediapipe_bridge` static library.
+4. Uncomment the real implementation in `MediaPipeBridge.cpp`.
 
 ## Compilation
 ```bash

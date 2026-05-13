@@ -4,6 +4,7 @@
 #include <QOpenGLFunctions_3_3_Core>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
+#include <QOpenGLFramebufferObject>
 #include "../../mediapipe_wrapper/MediaPipeBridge.h"
 
 class GLImageWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core {
@@ -26,31 +27,21 @@ protected:
     void paintGL() override;
 
 private:
-    QOpenGLShaderProgram *shaderProgram;
+    QOpenGLShaderProgram *mainShader;
+    QOpenGLShaderProgram *dispShader;
+
     QOpenGLTexture *texture;
+    QOpenGLFramebufferObject *fbo;
+
     int skinSmoothness;
     int faceShape;
     int eyeSize;
 
-    // Geometry for a fullscreen quad
-    GLuint vbo, vao, ebo;
+    GLuint quadVbo, quadVao, quadEbo;
 
-    // Landmarks data for shaders
     std::vector<Landmark> faceLandmarks;
-
-    // Shader Uniform Locations
-    int texLoc;
-    int skinSmoothnessLoc;
-    int faceShapeLoc;
-    int eyeSizeLoc;
-
-    // Feature points
-    int leftEyeLoc;
-    int rightEyeLoc;
-    int chinLoc;
-
-    // Utility to run MediaPipe
     MediaPipeBridge mpBridge;
 
     void createShaders();
+    void renderDisplacementMap();
 };
